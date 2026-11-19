@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>SwipeCleaner</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <h1>SwipeCleaner</h1>
+  <nav id="tabs" class="hidden">
+    <button data-tab="swipe" class="active">Swipe</button>
+    <button data-tab="pending">To Delete <span id="bPending" class="badge">0</span></button>
+    <button data-tab="trash">Recently Deleted <span id="bTrash" class="badge">0</span></button>
+    <button data-tab="compress">Compress</button>
+  </nav>
+  <button id="btnFolder" class="ghost">Change folder</button>
+</header>
+
+<main>
+  <section id="welcome">
+    <h2>Pick your photo folder</h2>
+    <p>Try <b>Pictures\Camera Roll</b> or <b>Pictures\iCloud Photos</b>. Deleted photos are moved to a <b>_Recently Deleted</b> folder inside it, never permanently removed until you say so.</p>
+    <button id="btnPick" class="primary">Choose folder</button>
+    <button id="btnResume" class="primary hidden"></button>
+    <p class="note">Works in Chrome and Edge. The browser will ask permission to edit the folder.</p>
+  </section>
+
+  <section id="tab-swipe" class="tab hidden">
+    <div id="done" class="hidden center"><h2>All done 🎉</h2><p>Open the <b>To Delete</b> tab to finish.</p></div>
+    <div id="stage">
+      <div id="card">
+        <img id="photo" draggable="false" alt="">
+        <div id="nopreview">Preview not supported for this file type (e.g. HEIC).<br>You can still keep or delete it.</div>
+        <div id="lblKeep" class="lbl keep">KEEP</div>
+        <div id="lblDel" class="lbl del">DELETE</div>
+      </div>
+    </div>
+    <div id="meta" class="center note"></div>
+    <div class="controls">
+      <button id="btnDel" class="round red" title="Delete (←)">✕</button>
+      <button id="btnUndo" class="round grey" title="Undo (Z)">↶</button>
+      <button id="btnKeep" class="round green" title="Keep (→)">✓</button>
+    </div>
+    <div id="count" class="center note"></div>
+    <div class="center note">Keyboard: ← delete · → keep · Z undo</div>
+  </section>
+
+  <section id="tab-pending" class="tab hidden">
+    <div class="bar">
+      <button id="btnCommit" class="primary" disabled>Move to Recently Deleted</button>
+      <span class="note">Click a photo to take it off the list.</span>
+    </div>
+    <div id="pendingGrid" class="grid"></div>
+  </section>
+
+  <section id="tab-trash" class="tab hidden">
+    <div class="bar">
+      <button id="btnOld" class="ghost">Delete items older than 30 days</button>
+      <button id="btnEmpty" class="danger">Empty Recently Deleted</button>
+    </div>
+    <div id="trashGrid" class="grid"></div>
+  </section>
+
+  <section id="tab-compress" class="tab hidden">
+    <h2>Compress large photos</h2>
+    <p id="cStats" class="note"></p>
+    <label>JPEG quality: <b id="qv">70</b>%
+      <input id="q" type="range" min="30" max="95" value="70"></label>
+    <label>Maximum size:
+      <select id="maxdim">
+        <option value="0">Keep original dimensions</option>
+        <option value="4000">Longest side 4000 px</option>
+        <option value="3000">Longest side 3000 px</option>
+        <option value="2000">Longest side 2000 px</option>
+      </select></label>
+    <p class="warn">Compressing re-saves photos as JPEG. This removes EXIF data (date taken, location) and changes the file's modified date. Originals are moved to Recently Deleted, so you can undo it.</p>
+    <button id="btnCompress" class="primary">Compress photos over 1.5 MB</button>
+    <progress id="prog" value="0" max="1" class="hidden"></progress>
+    <p id="cResult"></p>
+  </section>
+</main>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

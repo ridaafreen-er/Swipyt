@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "SwipeCleaner",
+  "version": "1.0",
+  "description": "Swipe through photos to keep or delete them, restore from Recently Deleted, and compress large photos.",
+  "action": { "default_title": "Open SwipeCleaner" },
+  "background": { "service_worker": "background.js" },
+  "icons": { "16": "icon16.png", "48": "icon48.png", "128": "icon128.png" }
+}
