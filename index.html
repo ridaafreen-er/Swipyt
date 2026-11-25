@@ -19,11 +19,11 @@
 
 <main>
   <section id="welcome">
-    <h2>Pick your photo folder</h2>
+    <h2>Pick your photo and video folder</h2>
     <p>Try <b>Pictures\Camera Roll</b> or <b>Pictures\iCloud Photos</b>. Deleted photos are moved to a <b>_Recently Deleted</b> folder inside it, never permanently removed until you say so.</p>
     <button id="btnPick" class="primary">Choose folder</button>
     <button id="btnResume" class="primary hidden"></button>
-    <p class="note">Works in Chrome and Edge. The browser will ask permission to edit the folder.</p>
+    <p class="note">Works in Chrome and Edge. The browser will ask permission to edit the folder. Video playback depends on the format and codec supported by your browser.</p>
   </section>
 
   <section id="tab-swipe" class="tab hidden">
@@ -31,7 +31,8 @@
     <div id="stage">
       <div id="card">
         <img id="photo" draggable="false" alt="">
-        <div id="nopreview">Preview not supported for this file type (e.g. HEIC).<br>You can still keep or delete it.</div>
+        <video id="video" controls playsinline preload="metadata" class="hidden"></video>
+        <div id="nopreview">Could not preview this file.<br>You can still keep or delete it.</div>
         <div id="lblKeep" class="lbl keep">KEEP</div>
         <div id="lblDel" class="lbl del">DELETE</div>
       </div>
@@ -49,7 +50,7 @@
   <section id="tab-pending" class="tab hidden">
     <div class="bar">
       <button id="btnCommit" class="primary" disabled>Move to Recently Deleted</button>
-      <span class="note">Click a photo to take it off the list.</span>
+      <span class="note">Click an item to take it off the list.</span>
     </div>
     <div id="pendingGrid" class="grid"></div>
   </section>
@@ -81,6 +82,8 @@
   </section>
 </main>
 <div id="toast"></div>
+<script src="vendor/heic2any.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
+  
